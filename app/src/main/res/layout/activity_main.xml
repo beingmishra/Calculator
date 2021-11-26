@@ -13,6 +13,7 @@
             android:textSize="65sp"
             android:textDirection="locale"
             android:textAlignment="textEnd"
+            android:background="@color/white"
             android:singleLine="true"
             android:gravity="bottom"
             android:textColor="@color/black"
