@@ -7,14 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-
-import com.google.android.gms.common.util.ArrayUtils;
-import com.udojava.evalex.Expression;
-
-import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Stack;
+
+import com.github.ayaanqui.expressionresolver.Resolver;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -134,136 +129,162 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String content = display.getText().toString();
-                char[] ch = new char[content.length()];
-                for (int i = 0; i < content.length(); i++) {
-                    ch[i] = content.charAt(i);
+                if (content==""){
+                    display.setText("");
+                } else{
+                    char[] ch = new char[content.length()];
+                    for (int i = 0; i < content.length(); i++) {
+                        ch[i] = content.charAt(i);
+                    }
+                    char[] del = Arrays.copyOf(ch, ch.length-1);
+                    String s = String.valueOf(del);
+                    display.setText(s);
                 }
-                char[] del = Arrays.copyOf(ch, ch.length-1);
-                String s = String.valueOf(del);
-                display.setText(s);
             }
         });
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = display.getText().toString();
-                char[] ch = new char[content.length()];
-                for (int i = 0; i < content.length(); i++) {
-                    ch[i] = content.charAt(i);
+                if (content==""){
+                    display.setText("");
+                } else {
+                    char[] ch = new char[content.length()];
+                    for (int i = 0; i < content.length(); i++) {
+                        ch[i] = content.charAt(i);
+                    }
+                    char last = ch[ch.length - 1];
+                    if (last == '+') {
+                        display.setText(content + "");
+                    } else if (last == '-') {
+                        ch[ch.length - 1] = '+';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else if (last == 'x') {
+                        ch[ch.length - 1] = '+';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else if (last == '/') {
+                        ch[ch.length - 1] = '+';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else {
+                        display.setText(content + "+");
+                    }
                 }
-                char last = ch[ch.length-1];
-                if (last == '+'){
-                    display.setText(content+"");
-                }else if (last == '-'){
-                    ch[ch.length-1] = '+';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else if (last == 'x'){
-                    ch[ch.length-1] = '+';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else if (last == '/'){
-                    ch[ch.length-1] = '+';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else{
-                    display.setText(content+"+");
-                }
-
             }
         });
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = display.getText().toString();
-                char[] ch = new char[content.length()];
-                for (int i = 0; i < content.length(); i++) {
-                    ch[i] = content.charAt(i);
+                if (content==""){
+                    display.setText("");
+                } else {
+                    char[] ch = new char[content.length()];
+                    for (int i = 0; i < content.length(); i++) {
+                        ch[i] = content.charAt(i);
+                    }
+                    char last = ch[ch.length - 1];
+                    if (last == '-') {
+                        display.setText(content + "");
+                    } else if (last == '+') {
+                        ch[ch.length - 1] = '-';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else if (last == 'x') {
+                        ch[ch.length - 1] = '-';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else if (last == '/') {
+                        ch[ch.length - 1] = '-';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else {
+                        display.setText(content + "-");
+                    }
                 }
-                char last = ch[ch.length-1];
-                if (last == '-'){
-                    display.setText(content+"");
-                }else if (last == '+'){
-                    ch[ch.length-1] = '-';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else if (last == 'x'){
-                    ch[ch.length-1] = '-';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else if (last == '/'){
-                    ch[ch.length-1] = '-';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else{
-                    display.setText(content+"-");
-                }
-
             }
         });
         division.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = display.getText().toString();
-                char[] ch = new char[content.length()];
-                for (int i = 0; i < content.length(); i++) {
-                    ch[i] = content.charAt(i);
+                if (content==""){
+                    display.setText("");
+                } else {
+                    char[] ch = new char[content.length()];
+                    for (int i = 0; i < content.length(); i++) {
+                        ch[i] = content.charAt(i);
+                    }
+                    char last = ch[ch.length - 1];
+                    if (last == '/') {
+                        display.setText(content + "");
+                    } else if (last == '-') {
+                        ch[ch.length - 1] = '/';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else if (last == 'x') {
+                        ch[ch.length - 1] = '/';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else if (last == '+') {
+                        ch[ch.length - 1] = '/';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else {
+                        display.setText(content + "/");
+                    }
                 }
-                char last = ch[ch.length-1];
-                if (last == '/'){
-                    display.setText(content+"");
-                }else if (last == '-'){
-                    ch[ch.length-1] = '/';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else if (last == 'x'){
-                    ch[ch.length-1] = '/';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else if (last == '+'){
-                    ch[ch.length-1] = '/';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else{
-                    display.setText(content+"/");
-                }
-
             }
         });
         product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = display.getText().toString();
-                char[] ch = new char[content.length()];
-                for (int i = 0; i < content.length(); i++) {
-                    ch[i] = content.charAt(i);
+                if (content==""){
+                    display.setText("");
+                } else {
+                    char[] ch = new char[content.length()];
+                    for (int i = 0; i < content.length(); i++) {
+                        ch[i] = content.charAt(i);
+                    }
+                    char last = ch[ch.length - 1];
+                    if (last == 'x') {
+                        display.setText(content + "");
+                    } else if (last == '-') {
+                        ch[ch.length - 1] = 'x';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else if (last == '+') {
+                        ch[ch.length - 1] = 'x';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else if (last == '/') {
+                        ch[ch.length - 1] = 'x';
+                        String s = String.valueOf(ch);
+                        display.setText(s);
+                    } else {
+                        display.setText(content + "*");
+                    }
                 }
-                char last = ch[ch.length-1];
-                if (last == 'x'){
-                    display.setText(content+"");
-                }else if (last == '-'){
-                    ch[ch.length-1] = 'x';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else if (last == '+'){
-                    ch[ch.length-1] = 'x';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else if (last == '/'){
-                    ch[ch.length-1] = 'x';
-                    String s = String.valueOf(ch);
-                    display.setText(s);
-                }else{
-                    display.setText(content+"*");
-                }
-
             }
         });
         power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String content = display.getText().toString();
-                display.setText(content+"^");
+                if (content==""){
+                    display.setText("");
+                } else {
+                    char[] ch = new char[content.length()];
+                    char last = ch[ch.length-1];
+                    if (last == '^') {
+                        display.setText(content + "");
+                    }else {
+                        display.setText(content+"^");
+                    }
+                }
             }
         });
         clear.setOnClickListener(new View.OnClickListener() {
@@ -276,8 +297,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String content = display.getText().toString();
-                BigDecimal result = new Expression(content).eval();
-                display.setText(String.valueOf(result));
+                if (content==""){
+                    display.setText("");
+                } else {
+                    Resolver calculator = new Resolver();
+                    calculator.setExpression(content);
+                    double value = calculator.solveExpression().result;
+                    int result = (int) value;
+                    display.setText(String.valueOf(result));
+                }
             }
         });
 
@@ -286,49 +314,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // Method to evaluate value of a postfix expression
-    static int evaluatePostfix(String exp)
-    {
-        //create a stack
-        Stack<Integer> stack=new Stack<>();
-
-        // Scan all characters one by one
-        for(int i=0;i<exp.length();i++)
-        {
-            char c=exp.charAt(i);
-
-            // If the scanned character is an operand (number here),
-            // push it to the stack.
-            if(Character.isDigit(c))
-                stack.push(c - '0');
-
-                //  If the scanned character is an operator, pop two
-                // elements from stack apply the operator
-            else
-            {
-                int val1 = stack.pop();
-                int val2 = stack.pop();
-
-                switch(c)
-                {
-                    case '+':
-                        stack.push(val2+val1);
-                        break;
-
-                    case '-':
-                        stack.push(val2- val1);
-                        break;
-
-                    case '/':
-                        stack.push(val2/val1);
-                        break;
-
-                    case '*':
-                        stack.push(val2*val1);
-                        break;
-                }
-            }
-        }
-        return stack.pop();
-    }
 }
