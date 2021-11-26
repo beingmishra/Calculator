@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 
 import com.google.android.gms.common.util.ArrayUtils;
+import com.udojava.evalex.Expression;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Stack;
 
@@ -252,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                     String s = String.valueOf(ch);
                     display.setText(s);
                 }else{
-                    display.setText(content+"x");
+                    display.setText(content+"*");
                 }
 
             }
@@ -274,7 +276,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String content = display.getText().toString();
-                display.setText(evaluatePostfix(content));
+                BigDecimal result = new Expression(content).eval();
+                display.setText(String.valueOf(result));
             }
         });
 
