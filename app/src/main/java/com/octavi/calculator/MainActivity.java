@@ -188,15 +188,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dot.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 String content = display.getText().toString();
-                char[] ch = new char[content.length()];
-                for (int i = 0; i < content.length(); i++) {
-                    ch[i] = content.charAt(i);
-                }
-                char last = ch[ch.length-1];
-                if (last == '.') {
-                    display.setText(content + "");
-                }else {
-                    display.setText(content+".");
+                if (content==""){
+                    display.setText("");
+                } else {
+                    char[] ch = new char[content.length()];
+                    for (int i = 0; i < content.length(); i++) {
+                        ch[i] = content.charAt(i);
+                    }
+                    char last = ch[ch.length - 1];
+                    if (last == '.') {
+                        display.setText(content + "");
+                    } else {
+                        display.setText(content + ".");
+                    }
                 }
             }
         });
